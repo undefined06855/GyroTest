@@ -34,13 +34,12 @@
 
     <body>
         <div id="wrapper">
-            <div id="content">
-            </div>
+            <div id="content"></div>
         </div>
 
         <script>
             window.addEventListener("deviceorientation", event => {
-                document.getElementById("content").style.transform = "translate(" + event.beta+2 + "px, " + event.gamma*2 + "px)"
+                document.getElementById("content").style.transform = "translate(" + event.gamma+2 + "px, " + event.beta*2 + "px)"
             });
         </script>
     </body>
