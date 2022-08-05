@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+    <head>
+        <title> Gyro test </title>
+
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+            }
+
+            #wrapper {
+                position: fixed;
+                top: 0;
+                left: 0;
+
+                width: 100vw;
+                height: 100vh;
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #content {
+                width: 30px;
+                height: 30px;
+                background-color: blue;
+                border-radius: 50%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="content"></div>
+        </div>
+
+        <script>
+            window.addEventListener("deviceorientation", event => {
+                document.getElementById("content").style.transform = "translate(" + event.beta+2 + "px, " + event.gamma*2 + "px)"
+            });
+        </script>
+    </body>
+</html>
