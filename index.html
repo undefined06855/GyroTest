@@ -13,15 +13,14 @@
                 padding: 0;
             }
 
-            body {
+            #wrapper {
                 background-color: orange;
-                outline: 5px dashed yellow;
             }
 
             #walls {
                 position: fixed;
-                top: 0;
-                left: 0;
+                top: 10vh;
+                left: 10vw;
 
                 width: 80vw;
                 height: 80vh;
@@ -51,9 +50,12 @@
     </head>
 
     <body>
-        <div class="sizefix"></div>
-        <div id="walls"></div>
-        <div id="ball"></div>
+        <div id="wrapper">
+            <div class="sizefix"></div>
+            <div id="walls"></div>
+            <div id="ball"></div>
+        </div>
+
 
         <script>
             var g = false;
@@ -78,7 +80,10 @@
                     "top": window.innerHeight / 10,
                     "bottom": window.innerHeight - (window.innerHeight / 10) - 35,
                 }
+            })
 
+            document.getElementById("wrapper").addEventListener("click", event => {
+                document.getElementById("wrapper").requestFullscreen()
             })
             requestAnimationFrame(update)
 
