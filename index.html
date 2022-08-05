@@ -26,11 +26,10 @@
 
                 width: 80vw;
                 height: 80vh;
-                background-color: white;
+                background: linear-gradient(144deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 7%, rgba(238,238,238,1) 7%, rgba(238,238,238,1) 13%, rgba(255,255,255,1) 13%);
 
                 border-radius: calc(35px / 2);
-
-                outline: 5px dashed red;
+                box-shadow: 0px 0px 0px 4px black;
             }
 
             #ball {
@@ -121,8 +120,28 @@
             })
 
             window.addEventListener("deviceorientation", event => {
-                dx = event.gamma
-                dy = event.beta
+                if (typeof window.screen.orientation === "string")
+                    if (window.screen.orientation.indexOf("portrait") != -1)
+                    {
+                        dx = event.gamma
+                        dy = event.beta
+                    }
+                    else
+                    {
+                        dy = event.gamma
+                        dx = event.beta
+                    }
+                else
+                    if (window.screen.orientation["type"].indexOf("portrait") != -1)
+                    {
+                        dx = event.gamma
+                        dy = event.beta
+                    }
+                    else
+                    {
+                        dy = event.gamma
+                        dx = event.beta
+                    }
             });
 
             function update()
