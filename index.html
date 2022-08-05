@@ -4,6 +4,9 @@
     <head>
         <title> Gyro test </title>
 
+        <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+        <meta charset="UTF-8">
+
         <style>
             body, html {
                 margin: 0;
@@ -57,14 +60,25 @@
               , y = 0
               , dx = 0
               , dy = 0
+              , walls = {
+                    "left": window.innerWidth / 10,
+                    "right": window.innerWidth - (window.innerWidth / 10) - 35,
+                    "top": window.innerHeight / 10,
+                    "bottom": window.innerHeight - (window.innerHeight / 10) - 35,
+                }
+
+            window.addEventListener("resize", event => {
+                walls = {
+                    "left": window.innerWidth / 10,
+                    "right": window.innerWidth - (window.innerWidth / 10) - 35,
+                    "top": window.innerHeight / 10,
+                    "bottom": window.innerHeight - (window.innerHeight / 10) - 35,
+                }
+
+            })
+            requestAnimationFrame(update)
 
 
-            const walls = {
-                "left": window.innerWidth / 10,
-                "right": window.innerWidth - (window.innerWidth / 10) - 35,
-                "top": window.innerHeight / 10,
-                "bottom": window.innerHeight - (window.innerHeight / 10) - 35,
-            }
 
 
             window.addEventListener("deviceorientation", event => {
@@ -91,7 +105,6 @@
                 requestAnimationFrame(update)
             }
 
-            requestAnimationFrame(update)
         </script>
     </body>
 </html>
