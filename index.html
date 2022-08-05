@@ -10,61 +10,90 @@
                 padding: 0;
             }
 
-            #wrapper {
+            body {
+                background-color: orange;
+            }
+
+            #walls {
                 position: fixed;
                 top: 0;
                 left: 0;
+                margin-left: 10vw;
+                margin-top: 10vh;
 
-                width: 100vw;
-                height: 100vh;  
+                width: 80vw;
+                height: 80vh;
+                background-color: white;
+
+                border-radius: calc(35px / 2);
             }
 
-            #content {
-                width: 30px;
-                height: 30px;
+            #ball {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 35px;
+                height: 35px;
                 background-color: blue;
                 border-radius: 50%;
+            }
+            
+            .sizefix {
+                width: 100vw;
+                height: 100vh;
             }
         </style>
     </head>
 
     <body>
-        <div id="text"></div>
-        <div id="wrapper">
-            <div id="content"></div>
-        </div>
+        <div id="walls"></div>
+        <div class="sizefix"></div>
+        <div id="ball"></div>
 
         <script>
+            var g = false;
+            window.addEventListener("devicemotion",e=>g=e.rotationRate.alpha||e.rotationRate.beta||e.rotationRate.gamma);
+            g && alert("you non have rotat e  detetcor :(")
 
-            var x = 60
-              , y = 60
+            var x = 0
+              , y = 0
               , dx = 0
               , dy = 0
 
-              , gx = 0
-              , gy = 0
+
+            const walls = {
+                "left": window.innerWidth / 10,
+                "right": window.innerWidth - (window.innerWidth / 10) - 35,
+                "top": window.innerHeight / 10,
+                "bottom": window.innerHeight - (window.innerHeight / 10) - 35,
+            }
+
 
             window.addEventListener("deviceorientation", event => {
-                document.getElementById("content").style.transform = "translate(" + x + "px, " + y + "px)"
-
-                document.getElementById("text").innerText = "x (x): " + x + "\ny (y): " + y + "\ng: " + event.gamma + "\nb: " + event.beta + "\nwindowWidth: " + window.innerWidth + "\nwindowHeight: " + window.innerHeight
-
                 dx = event.gamma
                 dy = event.beta
+            });
+
+            function update()
+            {
+                document.getElementById("ball").style.transform = "translate(" + x + "px, " + y + "px)"
 
                 x += dx
                 y += dy
 
-                if (x > window.innerWidth - 30)
-                    x = window.innerWidth - 31
-                if (x < 0)
-                    x = 1
-                if (y > window.innerHeight - 30)
-                    y = window.innerHeight - 31
-                if (y < 0)
-                    y = 1
+                if (x > walls["right"])
+                    x = walls["right"] - 1
+                if (x < walls["left"])
+                    x = walls["left"] + 1
+                if (y > walls["bottom"])
+                    y = walls["bottom"] - 1
+                if (y < walls["top"])
+                    y = walls["top"] + 1
 
-            });
+                requestAnimationFrame(update)
+            }
+
+            requestAnimationFrame(update)
         </script>
     </body>
 </html>
