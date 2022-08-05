@@ -16,10 +16,8 @@
 
             #walls {
                 position: fixed;
-                top: 0;
-                left: 0;
-                margin-left: 10vw;
-                margin-top: 10vh;
+                top: 10vh;
+                left: 10vw;
 
                 width: 80vw;
                 height: 80vh;
@@ -81,14 +79,14 @@
                 x += dx
                 y += dy
 
-                if (x > walls["right"])
-                    x = walls["right"] - 1
-                if (x < walls["left"])
-                    x = walls["left"] + 1
-                if (y > walls["bottom"])
-                    y = walls["bottom"] - 1
-                if (y < walls["top"])
-                    y = walls["top"] + 1
+                if (x > walls["right"] + 1)
+                    x = walls["right"]
+                if (x < walls["left"] - 1)
+                    x = walls["left"]
+                if (y > walls["bottom"] + 1)
+                    y = walls["bottom"]
+                if (y < walls["top"] - 1)
+                    y = walls["top"]
 
                 requestAnimationFrame(update)
             }
