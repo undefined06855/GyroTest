@@ -33,13 +33,23 @@
     </head>
 
     <body>
+        <div id="text"></div>
         <div id="wrapper">
             <div id="content"></div>
         </div>
 
         <script>
+            function map(number, inMin, inMax, outMin, outMax)
+            {
+                return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+            }
+
             window.addEventListener("deviceorientation", event => {
-                document.getElementById("content").style.transform = "translate(" + event.gamma+2 + "px, " + event.beta*2 + "px)"
+                var newgamma = map(event.gamma, -180, 180, 0, window.innerWidth)
+                  , newbeta  = map(event.beta, -180, 180, 0, window.innerHeight);
+                document.getElementById("content").style.transform = "translate(" + newgamma + "px, " + newbeta + "px)"
+
+                document.getElementById("text").innerText = "ng (x): " + newgamma + "\nnb (y): " + newbeta + "\ng: " + event.gamma + "\nb: " + event.beta + "\nwindowWidth: " + window.innerWidth + "\nwindowHeight: " + window.innerHeight
             });
         </script>
     </body>
