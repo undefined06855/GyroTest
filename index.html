@@ -15,6 +15,7 @@
 
             body {
                 background-color: orange;
+                outline: 5px dashed yellow;
             }
 
             #walls {
@@ -27,6 +28,8 @@
                 background-color: white;
 
                 border-radius: calc(35px / 2);
+
+                outline: 5px dashed red;
             }
 
             #ball {
@@ -40,6 +43,7 @@
             }
             
             .sizefix {
+                opacity: 0;
                 width: 100vw;
                 height: 100vh;
             }
@@ -47,8 +51,8 @@
     </head>
 
     <body>
-        <div id="walls"></div>
         <div class="sizefix"></div>
+        <div id="walls"></div>
         <div id="ball"></div>
 
         <script>
