@@ -35,17 +35,35 @@
         </div>
 
         <script>
-            function map(number, inMin, inMax, outMin, outMax)
-            {
-                return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-            }
+
+            var x = 60
+              , y = 60
+              , dx = 0
+              , dy = 0
+
+              , gx = 0
+              , gy = 0
 
             window.addEventListener("deviceorientation", event => {
-                var newgamma = map(event.gamma, -90, 90, 0, window.innerWidth)
-                  , newbeta  = map(event.beta, -90, 90, 0, window.innerHeight);
-                document.getElementById("content").style.transform = "translate(" + newgamma + "px, " + newbeta + "px)"
+                document.getElementById("content").style.transform = "translate(" + x + "px, " + y + "px)"
 
-                document.getElementById("text").innerText = "ng (x): " + newgamma + "\nnb (y): " + newbeta + "\ng: " + event.gamma + "\nb: " + event.beta + "\nwindowWidth: " + window.innerWidth + "\nwindowHeight: " + window.innerHeight
+                document.getElementById("text").innerText = "x (x): " + x + "\ny (y): " + y + "\ng: " + event.gamma + "\nb: " + event.beta + "\nwindowWidth: " + window.innerWidth + "\nwindowHeight: " + window.innerHeight
+
+                dx = event.gamma
+                dy = event.beta
+
+                x += dx
+                y += dy
+
+                if (x > window.innerWidth - 30)
+                    x = window.innerWidth - 31
+                if (x < 0)
+                    x = 1
+                if (y > window.innerHeight - 30)
+                    y = window.innerHeight - 31
+                if (y < 0)
+                    y = 1
+
             });
         </script>
     </body>
